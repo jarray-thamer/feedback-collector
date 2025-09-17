@@ -1,12 +1,12 @@
 "use client";
 import {
-  BoltIcon,
-  BookOpenIcon,
-  ChevronDownIcon,
-  Layers2Icon,
-  LogOutIcon,
-  PinIcon,
-  UserPenIcon,
+  Home,
+  ChevronDown,
+  LayoutDashboard,
+  FolderPlus,
+  FolderKanban,
+  MessageSquare,
+  LogOut,
 } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -47,11 +47,7 @@ export default function UserDropDown({
               {user?.name.slice(0, 2).toUpperCase()}
             </AvatarFallback>
           </Avatar>
-          <ChevronDownIcon
-            size={16}
-            className="opacity-60"
-            aria-hidden="true"
-          />
+          <ChevronDown size={16} className="opacity-60" aria-hidden="true" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="max-w-64">
@@ -66,8 +62,14 @@ export default function UserDropDown({
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem asChild>
+            <Link href="/">
+              <Home size={16} className="opacity-60" aria-hidden="true" />
+              <span>Home</span>
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem asChild>
             <Link href="/dashboard">
-              <BookOpenIcon
+              <LayoutDashboard
                 size={16}
                 className="opacity-60"
                 aria-hidden="true"
@@ -75,29 +77,40 @@ export default function UserDropDown({
               <span>Dashboard</span>
             </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Layers2Icon size={16} className="opacity-60" aria-hidden="true" />
-            <span>Create Collector</span>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <BoltIcon size={16} className="opacity-60" aria-hidden="true" />
-            <span>Option 3</span>
-          </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem>
-            <PinIcon size={16} className="opacity-60" aria-hidden="true" />
-            <span>Option 4</span>
+            <FolderPlus size={16} className="opacity-60" aria-hidden="true" />
+            <span>Create collector</span>
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            <UserPenIcon size={16} className="opacity-60" aria-hidden="true" />
-            <span>Option 5</span>
+        </DropdownMenuGroup>
+        <DropdownMenuSeparator />
+        <DropdownMenuGroup>
+          <DropdownMenuItem asChild>
+            <Link href="/dashboard/collectors">
+              <FolderKanban
+                size={16}
+                className="opacity-60"
+                aria-hidden="true"
+              />
+              <span>All collectors</span>
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <Link href="/dashboard/feedbacks">
+              <MessageSquare
+                size={16}
+                className="opacity-60"
+                aria-hidden="true"
+              />
+              <span>All feedback</span>
+            </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={signOut}>
-          <LogOutIcon size={16} className="opacity-60" aria-hidden="true" />
+          <LogOut size={16} className="opacity-60" aria-hidden="true" />
           <span>SignOut</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
