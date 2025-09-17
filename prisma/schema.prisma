@@ -95,13 +95,14 @@ model Event {
 }
 
 model Feedback {
-  id         String   @id @default(uuid())
-  eventId    String
-  event      Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
-  rating     Int
-  authorName String?
-  comment    String?
-  tags       String[]
+  id              String   @id @default(uuid())
+  eventId         String
+  event           Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  rating          Int
+  authorName      String?
+  profileImageUrl String?
+  comment         String?
+  tags            String[]
 
   isConsentAccepted Boolean  @default(false)
   photoUrls         String[]
