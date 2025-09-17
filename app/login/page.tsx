@@ -8,7 +8,7 @@ const LoginPage = async () => {
     headers: await headers(),
   });
   if (session) {
-    return redirect("/school");
+    return redirect("/dashboard");
   }
   return (
     <div className="relative flex min-h-svh flex-col items-center justify-center bg-background">

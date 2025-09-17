@@ -19,10 +19,11 @@ model User {
   sessions      Session[]
   accounts      Account[]
 
-  role       String?
   banned     Boolean?
   banReason  String?
   banExpires DateTime?
+
+  eventsCreated Event[]
 
   @@unique([email])
   @@map("user")
@@ -73,4 +74,40 @@ model Verification {
   updatedAt  DateTime?
 
   @@map("verification")
+}
+
+model Event {
+  id          String   @id @default(uuid())
+  slug        String   @unique
+  title       String
+  description String?
+  imageUrl    String?
+  createdById String
+  createdBy   User     @relation(fields: [createdById], references: [id], onDelete: Cascade)
+  isArchived  Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  feedback Feedback[]
+
+  @@index([createdById])
+  @@map("event")
+}
+
+model Feedback {
+  id         String   @id @default(uuid())
+  eventId    String
+  event      Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  rating     Int
+  authorName String?
+  comment    String?
+  tags       String[]
+
+  isConsentAccepted Boolean  @default(false)
+  photoUrls         String[]
+
+  submittedAt DateTime @default(now())
+
+  @@index([eventId, submittedAt])
+  @@map("feedback")
 }
