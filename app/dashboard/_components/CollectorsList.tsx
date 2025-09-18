@@ -157,8 +157,7 @@ function CollectorShareActions({ eventItem }: { eventItem: EventItem }) {
   const [open, setOpen] = useState(false);
   const svgContainerRef = useRef<HTMLDivElement | null>(null);
 
-  const shareBase =
-    process.env.NEXT_PUBLIC_COLLECTOR_SHARE_BASE || "/dashboard/";
+  const shareBase = process.env.NEXT_PUBLIC_COLLECTOR_SHARE_BASE || "/submit/";
   const shareUrl = useMemo(() => {
     if (typeof window === "undefined") return "";
     const origin = window.location.origin;
