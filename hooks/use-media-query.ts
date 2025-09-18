@@ -25,7 +25,10 @@ export function useMediaQuery(query: string): boolean {
         onChange as (e: MediaQueryListEvent) => void
       );
     } else if (typeof mediaQueryList.addListener === "function") {
-      mediaQueryList.addListener(onChange as (mql: MediaQueryList) => void);
+      // The legacy addListener expects a function with a MediaQueryListEvent parameter,
+      // but some browsers may call it with the MediaQueryList itself.
+      // TypeScript expects (ev: MediaQueryListEvent), so we cast accordingly.
+      mediaQueryList.addListener(onChange as EventListener);
     }
 
     return () => {
@@ -35,9 +38,7 @@ export function useMediaQuery(query: string): boolean {
           onChange as (e: MediaQueryListEvent) => void
         );
       } else if (typeof mediaQueryList.removeListener === "function") {
-        mediaQueryList.removeListener(
-          onChange as (mql: MediaQueryList) => void
-        );
+        mediaQueryList.removeListener(onChange as EventListener);
       }
     };
   }, [query]);
