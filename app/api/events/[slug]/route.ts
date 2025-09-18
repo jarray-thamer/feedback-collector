@@ -4,9 +4,10 @@ export async function GET(
   _req: Request,
   { params }: { params: { slug: string } }
 ) {
+  const { slug } = await params;
   try {
     const event = await prisma.event.findUnique({
-      where: { slug: params.slug },
+      where: { slug },
       select: {
         id: true,
         slug: true,
