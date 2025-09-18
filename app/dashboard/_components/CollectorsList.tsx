@@ -160,7 +160,7 @@ function CollectorShareActions({ eventItem }: { eventItem: EventItem }) {
   const shareBase = "/submit/";
   const shareUrl = useMemo(() => {
     if (typeof window === "undefined") return "";
-    const origin = window.location.origin;
+    const origin = "https://quick-feedback.netlify.app";
     return `${origin}${shareBase}${eventItem.slug}`;
   }, [eventItem.slug, shareBase]);
 

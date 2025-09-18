@@ -23,20 +23,27 @@ export default async function DashboardLayout({
         </Link>
         <CreateCollectorDialog />
         <nav className="mt-2 flex flex-col gap-1">
-          <a
-            href="#feedbacks"
+          <Link
+            href="/dashboard"
+            className="flex items-center gap-2 rounded-md px-2 py-2 text-sm hover:bg-accent hover:text-accent-foreground"
+          >
+            <MessageSquare className="h-4 w-4" />
+            Dashboard
+          </Link>
+          <Link
+            href="/dashboard/feedbacks"
             className="flex items-center gap-2 rounded-md px-2 py-2 text-sm hover:bg-accent hover:text-accent-foreground"
           >
             <MessageSquare className="h-4 w-4" />
             Feedbacks
-          </a>
-          <a
-            href="#collectors"
+          </Link>
+          <Link
+            href="/dashboard/collectors"
             className="flex items-center gap-2 rounded-md px-2 py-2 text-sm hover:bg-accent hover:text-accent-foreground"
           >
             <FolderKanban className="h-4 w-4" />
             Collectors
-          </a>
+          </Link>
         </nav>
       </aside>
 

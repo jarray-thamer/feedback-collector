@@ -11,7 +11,7 @@ export default function DashboardPage() {
       <section id="feedbacks">
         <div className="mb-3 flex items-center justify-between">
           <h2 className="text-lg font-semibold">Feedbacks</h2>
-          <Link href="/feedbacks">
+          <Link href="/dashboard/feedbacks">
             <Button variant="outline" size="sm" className="gap-2">
               <MessageSquare className="h-4 w-4" />
               View all

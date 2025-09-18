@@ -2,11 +2,12 @@ import { prisma } from "@/lib/db";
 import { notFound } from "next/navigation";
 import ArchiveSwitch from "./_components/ArchiveSwitch";
 
-type PageProps = { params: { slug: string } };
+type PageProps = { params: Promise<{ slug: string }> };
 
 export default async function EventPage({ params }: PageProps) {
+  const { slug } = await params;
   const event = await prisma.event.findUnique({
-    where: { slug: params.slug },
+    where: { slug },
     select: {
       id: true,
       slug: true,
@@ -41,15 +42,15 @@ export default async function EventPage({ params }: PageProps) {
             {event.slug}
           </div>
         </div>
-        <ArchiveSwitch slug={event.slug} defaultArchived={event.isArchived} />
+        <ArchiveSwitch slug={slug} defaultArchived={event.isArchived} />
       </header>
 
       {event.imageUrl ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img
-          src={event.imageUrl}
+          src={`${process.env.NEXT_PUBLIC_AWS_UPLOADED_IMAGE_URL}${event.imageUrl}`}
           alt={event.title}
-          className="w-full rounded-md border"
+          className="w-full h-48 rounded-md border"
         />
       ) : null}
 
